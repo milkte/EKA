@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
  import Index from './containers/index';
 import './App.css';
-import HackNews from './containers/Form1'
 import {Provider} from 'react-redux'
 import Form1 from './containers/Form1';
 import Form2 from './containers/Form2';
@@ -10,9 +9,6 @@ import configureStore from './store/configureStore'
 import {
     BrowserRouter,
     Route,
-    Link,
-    Redirect,
-    withRouter,
     Switch
 } from 'react-router-dom'
 const store = configureStore();

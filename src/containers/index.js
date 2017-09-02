@@ -5,12 +5,9 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
-import {get} from '../fetch/fetch';
 import * as userAction from '../actions/userActions';
 import {
     Link,
-    Router,
-    BrowserRouter,
 } from 'react-router-dom'
 
 class Index extends React.Component {
@@ -24,12 +21,6 @@ class Index extends React.Component {
     componentDidMount() {
         let userAction = this.props.userAction;
         userAction.init();
-        // get("/allUsers").then(res => console.log(res));
-    }
-
-    handleOnClick() {
-
-
     }
 
     render() {

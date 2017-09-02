@@ -23,7 +23,7 @@ class Form1 extends React.Component {
         console.log(this.state);
         let userAction = this.props.userAction;
         userAction.editForm2(this.state);
-        put('/updateProfile/' + this.props.match.params.id, this.state). then(res => {
+        put('/updateProfile/' + this.props.match.params.id, this.state).then(res => {
             localStorage.removeItem('formB');
             userAction.postId(res.id);
             this.setState({
