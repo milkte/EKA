@@ -24,6 +24,7 @@ class Form1 extends React.Component {
         let userAction = this.props.userAction;
         userAction.editForm2(this.state);
         put('/updateProfile/' + this.props.match.params.id, this.state). then(res => {
+            localStorage.removeItem('formB');
             userAction.postId(res.id);
             this.setState({
                 id: res.id,
@@ -44,9 +45,15 @@ class Form1 extends React.Component {
 
     }
 
+    saveForLaterHandler(){
+        localStorage.setItem('formB', JSON.stringify(this.state));
+    }
+
     componentDidMount() {
-
-
+        let localString = localStorage.getItem('formB');
+        if (localString) {
+            this.setState(JSON.parse(localString));
+        }
     }
 
     render() {
@@ -76,6 +83,7 @@ class Form1 extends React.Component {
                     <br/>
                     <input type="submit" value="Save"/>
                 </form>
+                <button onClick={this.saveForLaterHandler.bind(this)}>Save for later</button>
             </div>
         )
     }

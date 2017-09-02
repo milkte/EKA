@@ -23,18 +23,24 @@ class Form1 extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);
+        //redux
         let userAction = this.props.userAction;
         userAction.editForm3(this.state);
+        //api call
         put('/updateProfile/' + this.props.match.params.id, this.state). then(res => {
+            localStorage.removeItem('formC');
             this.setState({
                 id: res.id,
                 redirect: true})
         });
+    }
 
-
-
-
+    componentDidMount() {
+        //retrieve save data
+        let localString = localStorage.getItem('formC');
+        if (localString) {
+            this.setState(JSON.parse(localString));
+        }
     }
 
     handleChange(e){
@@ -47,9 +53,9 @@ class Form1 extends React.Component {
 
     }
 
-    componentDidMount() {
 
-
+    saveForLaterHandler(){
+        localStorage.setItem('formC', JSON.stringify(this.state));
     }
 
     render() {
@@ -89,6 +95,7 @@ class Form1 extends React.Component {
                     <br/>
                     <input type="submit" value="Save"/>
                 </form>
+                <button onClick={this.saveForLaterHandler.bind(this)}>Save for later</button>
             </div>
         )
     }

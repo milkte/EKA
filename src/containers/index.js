@@ -36,7 +36,11 @@ class Index extends React.Component {
         return (
             <div>
                     <Link to='/formA'>Start</Link>
+                <p>
+                    More previous styling example can be checked at www.Naafii.com
+                </p>
             </div>
+
         )
     }
 
