@@ -3,7 +3,7 @@ import React from 'react'
 import {connect} from 'react-redux';
 import * as userAction from '../actions/userActions';
 import {bindActionCreators} from 'redux';
-import {post} from '../fetch/fetch';
+import {put} from '../fetch/fetch';
 import {
     Redirect
 } from 'react-router-dom'
@@ -11,9 +11,9 @@ class Form1 extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            userName: this.props.userName || "",
-            password: this.props.password || "",
-            email: this.props.email || "",
+            firstName: this.props.firstName || "",
+            lastName: this.props.lastName || "",
+            tel: this.props.tel || "",
             redirect: false,
         }
     }
@@ -22,15 +22,13 @@ class Form1 extends React.Component {
         event.preventDefault();
         console.log(this.state);
         let userAction = this.props.userAction;
-        userAction.addUser(this.state);
-        post('/createNewUser', this.state).then(res => {
-
+        userAction.editForm2(this.state);
+        put('/updateProfile/' + this.props.match.params.id, this.state). then(res => {
             userAction.postId(res.id);
             this.setState({
                 id: res.id,
-                redirect: true});
-
-        });
+                redirect: true})
+            });
 
 
 
@@ -43,6 +41,7 @@ class Form1 extends React.Component {
         this.setState({
             [name]:value
         });
+
     }
 
     componentDidMount() {
@@ -52,27 +51,27 @@ class Form1 extends React.Component {
 
     render() {
         const {redirect} = this.state;
-    if (redirect){
-        return <Redirect to={'/formB/' + this.state.id} />
-    }
+        if (redirect){
+            return <Redirect to={'/formC/' + this.state.id}/>
+        }
 
         return (
             <div>
-                <h1>Form 1</h1>
+                <h1>Form 2</h1>
                 <form onSubmit={this.handleSubmit.bind(this)}>
-                    <label>User Name
+                    <label>First Name
                         <br/>
-                        <input type="text" name="userName"  onChange={this.handleChange.bind(this)} value={this.state.userName}/>
+                        <input type="text" name="firstName"  onChange={this.handleChange.bind(this)} value={this.state.userName}/>
                     </label>
                     <br/>
-                    <label>Password
+                    <label>Last Name
                         <br/>
-                        <input type="password" name="password"  onChange={this.handleChange.bind(this)} value={this.state.password}/>
+                        <input type="lastName" name="lastName"  onChange={this.handleChange.bind(this)} value={this.state.password}/>
                     </label>
                     <br/>
-                    <label>Email
+                    <label>Tel
                         <br/>
-                        <input type="email" name="email"  onChange={this.handleChange.bind(this)} value={this.state.email}/>
+                        <input type="number" name="tel"  onChange={this.handleChange.bind(this)} value={this.state.email}/>
                     </label>
                     <br/>
                     <input type="submit" value="Save"/>

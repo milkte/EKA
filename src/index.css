@@ -3,3 +3,20 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+input{
+  width: 200px;
+  height:30px;
+}
+
+label{
+  margin: 10px 0;
+}
+
+input[type=submit]{
+  margin-top:20px
+}
+
+form{
+  overflow: auto;
+}

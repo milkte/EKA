@@ -4,65 +4,57 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import * as indexTestAction from '../actions/indexText'
-import Form1 from './Form1';
+
+import {get} from '../fetch/fetch';
+import * as userAction from '../actions/userActions';
 import {
-    BrowserRouter,
-    Route,
     Link,
-    Redirect,
-    withRouter,
-    Switch
+    Router,
+    BrowserRouter,
 } from 'react-router-dom'
-import TestButton2 from './test'
 
-class Index extends React.Component{
+class Index extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            step: 0
+        }
+    }
 
-    // componentDidMount(){
-    //     let action = this.props.indexTestAction;
-    //     action.testUpdate({
-    //         test: 'test1'
-    //     })
-    // }
+    componentDidMount() {
+        let userAction = this.props.userAction;
+        userAction.init();
+        // get("/allUsers").then(res => console.log(res));
+    }
 
-        handleOnClick(){
-
-                let action = this.props.indexTestAction;
-                action.testUpdate({
-                    test:'test1'
-                })
-
+    handleOnClick() {
 
 
     }
 
-    render(){
+    render() {
         return (
-         <BrowserRouter>
-                <div>
-                    <Link to="/form1">Fill in the form</Link>
-                <Route exact={true} path='/form1' component={Form1}/>
-
-                </div>
-
-         </BrowserRouter>
-
-
+            <div>
+                    <Link to='/formA'>Start</Link>
+            </div>
         )
     }
 
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
-        indexTest: state.indexTest
+        userProfile: state.userProfile
     }
-}
+};
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
-        indexTestAction: bindActionCreators(indexTestAction, dispatch)
+        userAction: bindActionCreators(userAction, dispatch)
     }
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index)
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Index)

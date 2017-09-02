@@ -3,17 +3,39 @@ import React, {Component} from 'react';
 import './App.css';
 import HackNews from './containers/Form1'
 import {Provider} from 'react-redux'
+import Form1 from './containers/Form1';
+import Form2 from './containers/Form2';
+import Form3 from './containers/Form3';
 import configureStore from './store/configureStore'
-
+import {
+    BrowserRouter,
+    Route,
+    Link,
+    Redirect,
+    withRouter,
+    Switch
+} from 'react-router-dom'
 const store = configureStore();
+
+
 
 class App extends Component {
     render() {
         return (
             <Provider store={store}>
                 <div className="App">
-                    <Index/>
-                   {/*<UserForm/>*/}
+
+                    <BrowserRouter>
+                        <div>
+                        <Switch>
+                            <Route exact={true} path='/' component={Index}/>
+                            <Route exact={true} path='/formA' component={Form1}/>
+                            <Route exact={true} path='/formB/:id' component={Form2}/>
+                            <Route exact={true} path='/formC/:id' component={Form3}/>
+                        </Switch>
+                        </div>
+                    </BrowserRouter>
+
                 </div>
             </Provider>
         );
