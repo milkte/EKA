@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-// import Index from './containers/index'
+ import Index from './containers/index';
 import './App.css';
-import HackNews from './containers/hackNew'
-
+import HackNews from './containers/Form1'
 import {Provider} from 'react-redux'
 import configureStore from './store/configureStore'
 
@@ -13,8 +12,8 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <div className="App">
-                    HackNews
-                   <HackNews/>
+                    <Index/>
+                   {/*<UserForm/>*/}
                 </div>
             </Provider>
         );
