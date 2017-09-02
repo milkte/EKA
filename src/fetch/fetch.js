@@ -1,3 +1,6 @@
+const url = "https://whispering-stream-12805.herokuapp.com";
+    // const localUrl = "192.168.1.164:5000";
+
 export function get(api) {
     let myFetchOptions = {
         method: 'GET',
@@ -7,7 +10,7 @@ export function get(api) {
         }
     };
 
-    let res = fetch("http://192.168.1.164:5000" + api, myFetchOptions).then(res => res.json()).then(
+    let res = fetch(url + api, myFetchOptions).then(res => res.json()).then(
         json => {
             return json.data
         }
@@ -31,7 +34,7 @@ export function post(api, data) {
 
     };
 
-    let res = fetch("http://192.168.1.164:5000" + api, myFetchOptions).then(res => res.json()).then(
+    let res = fetch(url + api, myFetchOptions).then(res => res.json()).then(
         json => {
             return json.data
         }
@@ -53,7 +56,7 @@ export function put(api, data){
 
     };
 
-    let res = fetch("http://192.168.1.164:5000" + api, myFetchOptions).then(res => res.json()).then(
+    let res = fetch(url + api, myFetchOptions).then(res => res.json()).then(
         json => {
             return json.data
         }
